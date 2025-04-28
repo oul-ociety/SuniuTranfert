@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Eastern Union</title>
+    <title>Suniu Transfert</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -16,6 +16,8 @@
         header {
             padding: 20px;
             border-bottom: 1px solid #eee;
+            background-color: #242323;
+    color: white;
         }
         
         .logo {
@@ -52,6 +54,7 @@
             justify-content: space-around;
             padding: 30px 0;
             text-align: center;
+            background-color: #f9f9f9;
         }
         
         .feature {
@@ -129,7 +132,7 @@
 </head>
 <body>
     <header>
-        <div class="logo">Eastern Union</div>
+        <div class="logo">Suniu Tranfert</div>
         <nav>
             <ul>
                 <li>Send money</li>
@@ -141,7 +144,6 @@
             </ul>
         </nav>
         <div class="language-login">
-            <span>EN →</span>
             <span>Login</span>
             <span>Register</span>
         </div>
