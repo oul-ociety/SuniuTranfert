@@ -4,14 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Suniu Transfert</title>
+
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./Cuj.css">
+
+    <!-- CSS selon Vite ou non -->
+    @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
+        @vite(['resources/css/Cuj.css', 'resources/js/app.js'])
+    @else
+        <link rel="stylesheet" href="{{ asset('css/Cuj.css') }}">
+    @endif
+
 </head>
 <body>
     <header>
-        <div class="logo">Suniu Tranfert</div>
+        <div class="logo">Suniu Transfert</div>
         <nav>
             <ul>
                 <li><a href="#">Send money</a></li>
@@ -86,15 +95,15 @@
             
             <div class="options">
                 <div class="option">
-                    <img src="./wave.png" alt="Wave" height="40px">
+                    <img src="{{ Vite::asset('resources/images/wave.jpg') }}" alt="Wave" height="40px">
                     <p>Wave</p>
                 </div>
                 <div class="option">
-                    <img src="./OM.png" alt="Wave" height="40px">
+                    <img src="{{ Vite::asset('resources/images/OM.jpg') }}" alt="Orange Money" height="40px">
                     <p>Orange Money</p>
                 </div>
                 <div class="option">
-                    <img src="./FreeMoney.png" alt="Wave" height="40px">
+                    <img src="{{ Vite::asset('resources/images/FreeMoney.jpg') }}" alt="Free Money" height="40px">
                     <p>Free Money</p>
                 </div>
             </div>
@@ -113,15 +122,15 @@
 
             <div class="options">
                 <div class="option">
-                    <img src="./wave.png" alt="Wave" height="40px">
+                    <img src="{{ Vite::asset('resources/images/wave.jpg') }}" alt="Wave" height="40px">
                     <p>Wave</p>
                 </div>
                 <div class="option">
-                    <img src="./OM.png" alt="Wave" height="40px">
+                    <img src="{{ Vite::asset('resources/images/OM.jpg') }}" alt="Orange Money" height="40px">
                     <p>Orange Money</p>
                 </div>
                 <div class="option">
-                    <img src="./FreeMoney.png" alt="Wave" height="40px">
+                    <img src="{{ Vite::asset('resources/images/FreeMoney.jpg') }}" alt="Free Money" height="40px">
                     <p>Free Money</p>
                 </div>
             </div>
