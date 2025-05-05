@@ -110,11 +110,6 @@
         </div>
     </div>
     
-    <div class="option-title">How would you like to pay?</div>
-    <input type="radio" id="payOnline" name="payment_method" value="online" required>
-    <label for="payOnline">Pay online</label>
-    <input type="radio" id="payCash" name="payment_method" value="cash" required>
-    <label for="payCash">Pay cash in-store</label>
     
     <div class="option-group">
         <div class="option-title"></div>
