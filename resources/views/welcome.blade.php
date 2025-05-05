@@ -61,84 +61,91 @@
         </div>
     </section>
     
-    <form class="form-container" action="/" method="post">
-        <h2>Send money online</h2>
+    <form class="form-container" action="{{ route('paydunya.createInvoice') }}" method="post">
+    @csrf
+    <h2>Send money online</h2>
 
-        <div class="form-group">
-            <div class="option-title">Receiver's country</div>
-            <select>
-                <option>Select country</option>
-                <option value="Senegal">Senegal</option>
-                <option value="Canada">Canada</option>
-                <option value="Italie">Italie</option>
-                <option value="Espagne">Espagne</option>
-                <option value="Angleterre">Angleterre</option>
-                <option value="Allemagne">Allemagne</option>
-                <option value="Croatie">Croatie</option>
-            </select>
+    <div class="form-group">
+        <div class="option-title">Receiver's country</div>
+        <select name="pays" required>
+            <option>Select country</option>
+            <option value="Senegal">Senegal</option>
+            <option value="Canada">Canada</option>
+            <option value="Italie">Italie</option>
+            <option value="Espagne">Espagne</option>
+            <option value="Angleterre">Angleterre</option>
+            <option value="Allemagne">Allemagne</option>
+            <option value="Croatie">Croatie</option>
+        </select>
+    </div>
+    
+    <div class="form-group">
+        <div class="option-title">
+            <p>Send amount</p>
+            <p>Receive amount</p>
         </div>
+        <div class="amount-display">
+            <input type="number" name="montant" class="amount-box" value="0.00" step="0.01" required>
+            <ion-icon name="repeat" class="arrow"></ion-icon>
+            <input type="text" class="amount-box" value="0.00" disabled>
+        </div>
+    </div>
+    
+    <div class="option-group">
+        <div class="option-title">How does your receiver want the money?</div>
         
-        <div class="form-group">
-            <div class="option-title">
-                <p>Send amount</p>
-                <p>Receive amount</p>
+        <div class="options">
+            <div class="option">
+                <input type="radio" id="wave" name="service_credit" value="Wave" required>
+                <label for="wave"><img src="{{ Vite::asset('resources/images/wave.jpg') }}" alt="Wave" height="40px">Wave</label>
             </div>
-            <div class="amount-display">
-                <input type="text" class="amount-box" value="0.00">
-                <ion-icon name="repeat" class="arrow"></ion-icon>
-                <input type="text" class="amount-box" value="0.00">
+            <div class="option">
+                <input type="radio" id="om" name="service_credit" value="Orange Money" required>
+                <label for="om"><img src="{{ Vite::asset('resources/images/OM.jpg') }}" alt="Orange Money" height="40px">Orange Money</label>
+            </div>
+            <div class="option">
+                <input type="radio" id="freeMoney" name="service_credit" value="Free Money" required>
+                <label for="freeMoney"><img src="{{ Vite::asset('resources/images/FreeMoney.jpg') }}" alt="Free Money" height="40px">Free Money</label>
             </div>
         </div>
-        
-        <div class="option-group">
-            <div class="option-title">How does your receiver want the money?</div>
-            
-            <div class="options">
-                <div class="option">
-                    <img src="{{ Vite::asset('resources/images/wave.jpg') }}" alt="Wave" height="40px">
-                    <p>Wave</p>
-                </div>
-                <div class="option">
-                    <img src="{{ Vite::asset('resources/images/OM.jpg') }}" alt="Orange Money" height="40px">
-                    <p>Orange Money</p>
-                </div>
-                <div class="option">
-                    <img src="{{ Vite::asset('resources/images/FreeMoney.jpg') }}" alt="Free Money" height="40px">
-                    <p>Free Money</p>
-                </div>
+    </div>
+    
+    <div class="option-title">How would you like to pay?</div>
+    <input type="radio" id="payOnline" name="payment_method" value="online" required>
+    <label for="payOnline">Pay online</label>
+    <input type="radio" id="payCash" name="payment_method" value="cash" required>
+    <label for="payCash">Pay cash in-store</label>
+    
+    <div class="option-group">
+        <div class="option-title"></div>
+        <div class="options">
+            <div class="option">
+                <input type="radio" id="wavePayment" name="service_debit" value="Wave" required>
+                <label for="wavePayment"><img src="{{ Vite::asset('resources/images/wave.jpg') }}" alt="Wave" height="40px">Wave</label>
             </div>
-            
+            <div class="option">
+                <input type="radio" id="omPayment" name="service_debit" value="Orange Money" required>
+                <label for="omPayment"><img src="{{ Vite::asset('resources/images/OM.jpg') }}" alt="Orange Money" height="40px">Orange Money</label>
+            </div>
+            <div class="option">
+                <input type="radio" id="freeMoneyPayment" name="service_debit" value="Free Money" required>
+                <label for="freeMoneyPayment"><img src="{{ Vite::asset('resources/images/FreeMoney.jpg') }}" alt="Free Money" height="40px">Free Money</label>
+            </div>
         </div>
-        
-        
-        <div class="option-title">How would you like to pay?</div>
-            <input type="radio" id="r1" name="choice"> 
-            <label for="r1">Pay online</label>
-            <input type="radio" id="r2" name="choice"> 
-            <label for="r2">Pay cash in-store</label>
-        
-        <div class="option-group">
-            <div class="option-title"></div>
+    </div>
+    
+    <button class="continue-btn">Continue ></button>
+</form>
 
-            <div class="options">
-                <div class="option">
-                    <img src="{{ Vite::asset('resources/images/wave.jpg') }}" alt="Wave" height="40px">
-                    <p>Wave</p>
-                </div>
-                <div class="option">
-                    <img src="{{ Vite::asset('resources/images/OM.jpg') }}" alt="Orange Money" height="40px">
-                    <p>Orange Money</p>
-                </div>
-                <div class="option">
-                    <img src="{{ Vite::asset('resources/images/FreeMoney.jpg') }}" alt="Free Money" height="40px">
-                    <p>Free Money</p>
-                </div>
-            </div>
-            
-        </div>
-        
-        <button class="continue-btn">Continue ></button>
-    </form>
+<script>
+    // Example JS to update the receive amount based on send amount (this can be modified as per your actual logic)
+    document.querySelector('.amount-box').addEventListener('input', function() {
+        let sendAmount = parseFloat(document.querySelector('.amount-box').value);
+        let receiveAmount = sendAmount * 1.2; // Assuming a 20% conversion rate or any other business logic
+        document.querySelectorAll('.amount-box')[1].value = receiveAmount.toFixed(2);
+    });
+</script>
+
 
     <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
 </body>
