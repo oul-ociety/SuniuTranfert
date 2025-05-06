@@ -9,15 +9,16 @@ use Illuminate\Support\Facades\Log;
 class PaydunyaController extends Controller
 {
     public function pay(Request $request, PaydunyaService $paydunya)
-    {
-        $validated = $request->validate([
-            'montant' => 'required|numeric',
-            'pays' => 'required|string',
-            'service_debit' => 'required|string',
-            'service_credit' => 'required|string',
-        ]);
+{
+    $validated = $request->validate([
+        'montant' => 'required|numeric',
+        'pays' => 'required|string',
+        'service_debit' => 'required|string',
+        'service_credit' => 'required|string',
+    ]);
 
-        $url = $paydunya->createInvoice($validated);
+    $url = $paydunya->createInvoice($validated);
+
 
         if ($url) {
             return redirect($url);

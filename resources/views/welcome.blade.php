@@ -61,7 +61,7 @@
         </div>
     </section>
     
-    <form class="form-container" action="{{ route('paydunya.createInvoice') }}" method="post">
+    <form class="form-container" action="{{ route('paydunya.pay') }}" method="post">
     @csrf
     <h2>Send money online</h2>
 
@@ -131,6 +131,9 @@
     
     <button class="continue-btn">Continue ></button>
 </form>
+@if(session('error'))
+    <div class="alert alert-danger">{{ session('error') }}</div>
+@endif
 
 <script>
     // Example JS to update the receive amount based on send amount (this can be modified as per your actual logic)
