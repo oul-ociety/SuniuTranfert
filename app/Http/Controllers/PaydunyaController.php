@@ -9,22 +9,32 @@ use Illuminate\Support\Facades\Log;
 class PaydunyaController extends Controller
 {
     public function pay(Request $request, PaydunyaService $paydunya)
-{
-    $validated = $request->validate([
-        'montant' => 'required|numeric',
-        'pays' => 'required|string',
-        'service_debit' => 'required|string',
-        'service_credit' => 'required|string',
-    ]);
+    {
+        $messages = [
+            'montant.required' => 'Le montant est requis.',
+            'montant.numeric' => 'Le montant doit être un nombre.',
+            'montant.min' => 'Le montant doit être supérieur à zéro.',
+            'pays.required' => 'Le pays est requis.',
+            'service_debit.required' => 'Le service de débit est requis.',
+            'service_credit.required' => 'Le service de crédit est requis.',
+        ];
 
-    $url = $paydunya->createInvoice($validated);
+        $validated = $request->validate([
+            'montant' => 'required|numeric|min:1',
+            'pays' => 'required|string',
+            'service_debit' => 'required|string',
+            'service_credit' => 'required|string',
+        ], $messages);
 
-
+        $url = $paydunya->createInvoice($validated);
         if ($url) {
             return redirect($url);
         }
 
-        return back()->with('error', 'Erreur lors de la création du paiement.');
+        // Log the failed attempt for debugging
+        Log::error('Failed to create PayDunya invoice', ['data' => $validated]);
+
+        return back()->with('error', 'Erreur lors de la création du paiement. Veuillez réessayer plus tard.');
     }
 
     public function callback(Request $request)
