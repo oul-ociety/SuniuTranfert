@@ -4,6 +4,7 @@ namespace App\Services;
 
 use Paydunya\Checkout\CheckoutInvoice;
 use Paydunya\Setup;
+use Illuminate\Support\Facades\Log;
 
 class PaydunyaService
 {
@@ -17,24 +18,30 @@ class PaydunyaService
     }
 
     public function createInvoice($data)
-    {
-        $invoice = new CheckoutInvoice();
+{
+    $invoice = new CheckoutInvoice();
 
-        $invoice->setTotalAmount($data['montant']);
-        $invoice->addItem("Transfert d'argent", 1, $data['montant'], $data['montant'], "Vers " . $data['service_credit']);
+    $invoice->setTotalAmount($data['montant']);
+    $invoice->addItem("Transfert d'argent", 1, $data['montant'], $data['montant'], "Vers " . $data['service_credit']);
 
-        $invoice->addCustomData("pays", $data['pays']);
-        $invoice->addCustomData("service_debit", $data['service_debit']);
-        $invoice->addCustomData("service_credit", $data['service_credit']);
+    $invoice->addCustomData("pays", $data['pays']);
+    $invoice->addCustomData("service_debit", $data['service_debit']);
+    $invoice->addCustomData("service_credit", $data['service_credit']);
 
-        $invoice->setCallbackUrl(route('paydunya.callback'));
-        $invoice->setReturnUrl(route('paydunya.success'));
-        $invoice->setCancelUrl(route('paydunya.cancel'));
+    $invoice->setCallbackUrl(route('paydunya.callback'));
+    $invoice->setReturnUrl(route('paydunya.success'));
+    $invoice->setCancelUrl(route('paydunya.cancel'));
 
-        if ($invoice->create()) {
-            return $invoice->getInvoiceUrl();
-        }
-
-        return null;
+    if ($invoice->create()) {
+        return $invoice->getInvoiceUrl();
     }
+
+    // Log l'erreur pour debug
+    Log::error('Erreur création facture PayDunya');
+Log::error('Code réponse : ' . $invoice->response_code);
+Log::error('Texte réponse : ' . $invoice->response_text);
+
+    return null;
+}
+
 }
