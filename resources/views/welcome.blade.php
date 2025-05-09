@@ -136,13 +136,18 @@
 @endif
 
 <script>
-    // Example JS to update the receive amount based on send amount (this can be modified as per your actual logic)
+    // Calcul du montant reçu avec une commission de 20%
     document.querySelector('.amount-box').addEventListener('input', function() {
-        let sendAmount = parseFloat(document.querySelector('.amount-box').value);
-        let receiveAmount = sendAmount * 1.2; // Assuming a 20% conversion rate or any other business logic
+        let sendAmount = parseFloat(this.value) || 0;
+        
+        // Appliquer une commission de 20%
+        let receiveAmount = sendAmount * 0.95;
+        
+        // Mettre à jour le montant reçu avec 2 décimales
         document.querySelectorAll('.amount-box')[1].value = receiveAmount.toFixed(2);
     });
 </script>
+
 
 
     <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
